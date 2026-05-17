@@ -399,11 +399,13 @@ export default class Mii {
           0x6a,
           // MiiC v3 (switch colors, hats, and shirt / face paint color)
           0x6c,
+          // MiiC v4 (+ hat height)
+          0x6d,
         ]
       ),
       `Invalid Mii data size. Got ${
         this.bitStream.length / 8
-      }, expected 96 for FFSD, 104 for MiiC v1, or 106 for MiiC v2, or 108 for MiiC v3.`
+      }, expected 96 for FFSD, 104 for MiiC v1, or 106 for MiiC v2, or 108 for MiiC v3, or 109 for MiiC v4.`
     );
 
     // Value range and type checks
