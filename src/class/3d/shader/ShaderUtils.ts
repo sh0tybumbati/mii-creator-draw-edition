@@ -127,7 +127,7 @@ export async function traverseMesh(node: THREE.Mesh, shaderType: ShaderType) {
   const params = {
     color: new THREE.Color(...modulateColor),
     ...modulate,
-    map: originalMaterial.map || undefined,
+    ...(originalMaterial.map ? { map: originalMaterial.map } : {}),
     side
   };
 
