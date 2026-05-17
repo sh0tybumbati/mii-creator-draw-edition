@@ -9,7 +9,7 @@ import { _THREE } from "./PrepareThree";
 import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js";
 
 //! NOTE: THIS ASSUMES THE ROOT IS THE PUBLIC FOLDER
-let root = "/";
+let root = "./";
 export const setRoot = (newRoot: string) => {
   root = newRoot;
 };
