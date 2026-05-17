@@ -7,6 +7,7 @@ import { ArrayNum } from "../../util/Numbers";
 import { RenderPart } from "../../class/MiiEditor";
 import { MiiFavoriteColorLookupTable } from "../../constants/ColorTables";
 import { numToHex } from "../../util/NumberToHexString";
+import EditorIcons from "../../constants/EditorIcons";
 
 export function ExtHatTab(data: TabRenderInit) {
   data.container.append(
@@ -35,6 +36,23 @@ export function ExtHatTab(data: TabRenderInit) {
                 icon: data.icons.hat[k - 1],
                 part: RenderPart.Head,
               })),
+          ],
+        },
+        extHatHeight: {
+          label: "Hat Height",
+          items: [
+            {
+              type: FeatureSetType.Slider,
+              property: "extHatHeight",
+              iconStart: EditorIcons.scaleShort,
+              iconEnd: EditorIcons.scaleTall,
+              min: 0,
+              max: 127,
+              forceRender: true,
+              part: RenderPart.Head,
+              soundStart: "vert_stretch_down",
+              soundEnd: "vert_stretch_up",
+            },
           ],
         },
         extHatColor: {

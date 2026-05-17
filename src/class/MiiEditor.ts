@@ -230,6 +230,24 @@ export class MiiEditor {
     this.ui.scene.focusCamera(CameraPosition.MiiHead);
     this.ui.scene.getRendererElement().classList.add("ready");
     this.ui.mii.qs(".loader")!.classOff("active");
+
+    const canvas = this.ui.scene.getRendererElement();
+    canvas.style.touchAction = "none";
+    canvas.addEventListener("pointerdown", (e: PointerEvent) => {
+      if (e.pointerType === "pen") {
+        e.preventDefault();
+        canvas.setPointerCapture(e.pointerId);
+      }
+    });
+    canvas.addEventListener("pointermove", (e: PointerEvent) => {
+      if (e.pointerType === "pen") e.preventDefault();
+    });
+    canvas.addEventListener("pointerup", (e: PointerEvent) => {
+      if (e.pointerType === "pen") {
+        e.preventDefault();
+        canvas.releasePointerCapture(e.pointerId);
+      }
+    });
   }
   #updateCssVars() {
     let glassesColor: string;

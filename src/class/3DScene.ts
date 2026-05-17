@@ -943,8 +943,8 @@ export class Mii3DScene {
               let i = 0;
               if (GLB.asset.extras.partsTransform.hatTranslate) {
                 const [x, y, z] = GLB.asset.extras.partsTransform.hatTranslate;
-                console.log(GLB.asset.extras.partsTransform.hatTranslate);
-                const vec = new THREE.Vector3(x, y, z);
+                const heightOffset = (this.mii.extHatHeight - 64) * 0.15;
+                const vec = new THREE.Vector3(x, y + heightOffset, z);
                 hatModel.scene.position.add(vec);
                 //@ts-expect-error
                 window.hatModel = hatModel;

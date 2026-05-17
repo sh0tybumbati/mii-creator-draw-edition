@@ -337,6 +337,7 @@ export default class Mii {
   // Extended extension data used in this app only
   public extHatType!: number;
   public extHatColor!: number;
+  public extHatHeight!: number;
   // currently reserved, will be optional common colors.
   public extFacePaintColor!: number;
   public extShirtColor!: number;
@@ -839,6 +840,11 @@ export default class Mii {
     } else {
       this.extShirtColor = 0;
     }
+    if (this.bitStream.length / 8 > 0x6c) {
+      this.extHatHeight = this.bitStream.readUint8();
+    } else {
+      this.extHatHeight = 64;
+    }
 
     if (this.extFacelineColor) this.trueSkinColor = this.extFacelineColor;
     if (this.extHairColor) this.trueHairColor = this.extHairColor;
@@ -965,6 +971,7 @@ export default class Mii {
     // MiiC v3 fields
     this.bitStream.writeUint8(this.extFacePaintColor);
     this.bitStream.writeUint8(this.extShirtColor);
+    this.bitStream.writeUint8(this.extHatHeight);
 
     // console.log(
     //   "Wrote 8 extra bytes for NfpStoreDataExtention:",
