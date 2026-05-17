@@ -1162,9 +1162,9 @@ export class Mii3DScene {
           }
 
           GLB.scene.name = "MiiHead";
-          // head is no longer attached to head bone physically, no more need to offset rotation
-          // GLB.scene.rotation.set(-Math.PI / 2, 0, 0);
-          // GLB.scene.scale.set(0.12, 0.12, 0.12);
+          // Server GLB uses Y-forward axis convention; FFL.js does not need this
+          if (Config.renderer.useRendererServer)
+            GLB.scene.rotation.set(-Math.PI / 2, 0, 0);
           var headScale = 0.14;
           GLB.scene.scale.set(headScale, headScale, headScale);
 
