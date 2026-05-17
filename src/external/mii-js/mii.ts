@@ -348,11 +348,11 @@ export default class Mii {
     this.isMiiCData = false;
     if (buffer.byteLength === 0x60) {
       this.bitStream = new ExtendedBitStream(
-        // 96 + 12 = 108 bytes total for allowing FFSD files to import into MiiC v3.
-        Buffer.concat([buffer, new Uint8Array(12)])
+        // 96 + 13 = 109 bytes total for allowing FFSD files to import into MiiC v3.
+        Buffer.concat([buffer, new Uint8Array(13)])
       );
     } else {
-      const bytesToAdd = 0x6c - buffer.byteLength;
+      const bytesToAdd = 0x6d - buffer.byteLength;
       let tmpBuf;
       if (bytesToAdd > 0) {
         tmpBuf = Buffer.concat([buffer, new Uint8Array(bytesToAdd)]);
