@@ -277,6 +277,8 @@ export class MiiEditor {
     }
     await this.ui.scene.init();
     this.ui.mii.append(this.ui.scene.getRendererElement());
+    // Resize after canvas is in the DOM so dimensions are correct
+    this.ui.scene.resize();
     window.addEventListener("resize", () => {
       this.ui.scene.resize();
     });

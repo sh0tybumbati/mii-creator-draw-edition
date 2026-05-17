@@ -504,20 +504,13 @@ export class Mii3DScene {
   }
   // copied from three.js manual code lol
   resizeRendererToDisplaySize(width: number, height: number) {
+    if (!width || !height) return;
     this.#camera.aspect = width / height;
     this.#camera.updateProjectionMatrix();
-    const canvas = this.#renderer.domElement;
     const pixelRatio = window.devicePixelRatio;
-    const w = Math.floor(canvas.clientWidth * pixelRatio);
-    const h = Math.floor(canvas.clientHeight * pixelRatio);
-    // const needResize = canvas.width !== w || canvas.height !== h;
-    // if (needResize) {
-    // }
-    // return needResize;
-    // if (this.#composer !== undefined) this.#composer.setSize(width, height);
-    // else {
+    const w = Math.floor(width * pixelRatio);
+    const h = Math.floor(height * pixelRatio);
     this.#renderer.setSize(w, h, false);
-    // }
   }
   preparing!: boolean;
   async init() {
@@ -1162,9 +1155,6 @@ export class Mii3DScene {
           }
 
           GLB.scene.name = "MiiHead";
-          // Server GLB uses Y-forward axis convention; FFL.js does not need this
-          if (Config.renderer.useRendererServer)
-            GLB.scene.rotation.set(-Math.PI / 2, 0, 0);
           var headScale = 0.14;
           GLB.scene.scale.set(headScale, headScale, headScale);
 
