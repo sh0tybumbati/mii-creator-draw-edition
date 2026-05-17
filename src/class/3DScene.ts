@@ -1037,7 +1037,7 @@ export class Mii3DScene {
           shirtColor: this.getShirtColor(),
           pantsColor: this.getPantsColor(),
           shoesColor: this.getShoesColor(),
-          facelineColor: this.charModel!.facelineColor,
+          facelineColor: this.charModel?.facelineColor ?? null,
           nBody: nBody,
           nLegs: nLegs,
           bodyGroup: this.#scene.getObjectByName(
@@ -1132,18 +1132,12 @@ export class Mii3DScene {
           params["verifyCharInfo"] = "0";
           let GLB: GLTF;
           if (Config.renderer.useRendererServer) {
-            // TODO: FIX THIS FOR SERVER RENDERING LOL
-            GLB = null as any;
-            // GLB = await this.#gltfLoader.loadAsync(
-            //   tmpMii.studioUrl({
-            //     ext: "glb",
-            //     texResolution: "512",
-            //     miiName: this.mii.miiName,
-            //     creatorName: this.mii.creatorName,
-            //     miic: encodeURIComponent(this.mii.encode().toString("base64")),
-            //     ...params
-            //   } as unknown as any)
-            // );
+            const miicB64 = encodeURIComponent(tmpMii.exportBase64("miic"));
+            const extraParams = Object.entries(params)
+              .map(([k, v]) => `&${k}=${encodeURIComponent(v)}`)
+              .join("");
+            const url = `${Config.renderer.render3DHeadURL}&miic=${miicB64}${extraParams}`;
+            GLB = await this.#gltfLoader.loadAsync(url);
           } else {
             let modelType: ModelFlag = "NORMAL";
 

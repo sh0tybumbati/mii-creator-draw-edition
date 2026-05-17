@@ -156,7 +156,7 @@ export async function setupUi() {
   });
 
   function updateMusicVol() {
-    if (mm.editGainNode === undefined) return;
+    if (!mm.editGainNode || !mm.mainGainNode) return;
     // a bit repetitive
     if (state === "main") {
       mm.mainGainNode.gain.linearRampToValueAtTime(
