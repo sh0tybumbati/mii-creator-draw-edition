@@ -43,6 +43,7 @@ import {
 import { getSetting } from "../util/SettingsHelper";
 import { ShaderType } from "../constants/BodyShaderTypes";
 import { getHeadModel, getMaskTex, type ModelFlag } from "../util/MiiRendering";
+import { ensureFFLReady } from "../util/FFLLoader";
 import {
   FFLModulateType,
   makeExpressionFlag,
@@ -1146,6 +1147,7 @@ export class Mii3DScene {
                 break;
             }
 
+            await ensureFFLReady();
             GLB = await getHeadModel(
               tmpMii,
               this.getRenderer(),
