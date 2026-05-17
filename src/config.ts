@@ -3,7 +3,7 @@
 import { _ } from "./util/Lang";
 
 // Settings relating to local rendering.
-const useRendererServer = false; // Allow use of the renderer server (legacy rendering)
+const useRendererServer = true; // Allow use of the renderer server (legacy rendering)
 const fflResourcePath = [
   "/FFLResLow.dat",
   "/FFLResMiddle.dat",
@@ -13,7 +13,7 @@ const fflResourcesNames = ["Low", "Middle", "High"]; // Configure the path for w
 
 // Instance of FFL-Testing/Mii Studio API compatible renderer.
 // const baseURL = "http://localhost:5000/miis/image"; // <-- Uncomment this when using local FFL-testing for development
-const baseURL = "https://mii-renderer.nxw.pw/miis/image"; // <-- Comment this when committing for prod
+const baseURL = "https://ffl-testing-production.up.railway.app/miis/image"; // <-- Comment this when committing for prod
 // ^^ image.png, image.glb
 const newApiParams = true;
 // false if using FFL-Testing-with-hats
