@@ -3,11 +3,11 @@
 import { _ } from "./util/Lang";
 
 // Settings relating to local rendering.
-const useRendererServer = true; // Allow use of the renderer server (legacy rendering)
+const useRendererServer = false; // Allow use of the renderer server (legacy rendering)
 const fflResourcePath = [
-  "/FFLResLow.dat",
-  "/FFLResMiddle.dat",
-  "/FFLResHigh.dat"
+  "./FFLResHigh.dat",
+  "./FFLResHigh.dat",
+  "./FFLResHigh.dat"
 ]; // Configure the path for where the resource file is located.
 const fflResourcesNames = ["Low", "Middle", "High"]; // Configure the path for where the resource file is located.
 

@@ -177,5 +177,6 @@ out
 # FFL resource files
 FFLRes*.dat
 AFLRes*.dat
+!public/FFLResHigh.dat
 
 mii-creator-server
