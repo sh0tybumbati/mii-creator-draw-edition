@@ -1132,11 +1132,14 @@ export class Mii3DScene {
           params["verifyCharInfo"] = "0";
           let GLB: GLTF;
           if (Config.renderer.useRendererServer) {
+            const dataHex = encodeURIComponent(tmpMii.exportHex("studioData"));
             const miicB64 = encodeURIComponent(tmpMii.exportBase64("miic"));
+            // Build extra params, skip verifyCharInfo (already in base URL)
             const extraParams = Object.entries(params)
+              .filter(([k]) => k !== "verifyCharInfo")
               .map(([k, v]) => `&${k}=${encodeURIComponent(v)}`)
               .join("");
-            const url = `${Config.renderer.render3DHeadURL}&miic=${miicB64}${extraParams}`;
+            const url = `${Config.renderer.render3DHeadURL}&data=${dataHex}&miic=${miicB64}${extraParams}`;
             GLB = await this.#gltfLoader.loadAsync(url);
           } else {
             let modelType: ModelFlag = "NORMAL";
