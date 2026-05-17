@@ -49,7 +49,7 @@ export async function prepareFFLAsync() {
 
   FFLModule = await FFLModule({
     locateFile: (path: string) => {
-      return "/dist/" + path;
+      return new URL("./" + path, import.meta.url).href;
     }
   });
 
