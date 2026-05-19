@@ -62,11 +62,12 @@ export async function prepareFFLAsync() {
   // for some reason
   await loadClothesTextures();
 
-  const fflResourceFile = await fetch(
+  const fflResourceResponse = await fetch(
     Config.renderer.fflResourcePath[await getSetting("resourceType")]
   );
+  const fflResourceData = new Uint8Array(await fflResourceResponse.arrayBuffer());
 
-  let { module } = await initializeFFL(fflResourceFile, FFLModule);
+  let { module } = await initializeFFL(fflResourceData, FFLModule);
   FFLModule = module;
 
   console.log("Ready!");
