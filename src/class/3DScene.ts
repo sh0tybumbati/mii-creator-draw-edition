@@ -508,10 +508,7 @@ export class Mii3DScene {
     if (!width || !height) return;
     this.#camera.aspect = width / height;
     this.#camera.updateProjectionMatrix();
-    const pixelRatio = window.devicePixelRatio;
-    const w = Math.floor(width * pixelRatio);
-    const h = Math.floor(height * pixelRatio);
-    this.#renderer.setSize(w, h, false);
+    this.#renderer.setSize(width, height, false);
   }
   preparing!: boolean;
   async init() {
