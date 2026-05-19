@@ -88,7 +88,8 @@ export const MiiCreatorV4Data = _.struct([
   _.uint8("temporary"),
   _.uint8("eyeSclera"),
   _.uint8("clothesType"),
-  _.uint8("shoesColor")
+  _.uint8("shoesColor"),
+  _.uint8("hatHeight")
 ]) as StructInstance<MiiCreatorV4Data>;
 
 export const MiiCreatorV4AppendData = _.struct([
@@ -191,6 +192,7 @@ export type MiiCreatorV4Data = {
   eyeSclera: number;
   clothesType: number;
   shoesColor: number;
+  hatHeight: number;
 };
 
 export enum MiiCreatorOriginPlatform {
@@ -277,7 +279,8 @@ const EmptyMiiCreatorData: MiiCreatorV4Data = {
   temporary: 0,
   eyeSclera: 0,
   clothesType: -1,
-  shoesColor: -1
+  shoesColor: -1,
+  hatHeight: 64
 };
 export const EmptyMiiCreatorV4Data = () => ({ ...EmptyMiiCreatorData });
 
@@ -543,6 +546,7 @@ export const validationThing: Partial<Record<keyof MiiCreatorV4Data, Prop>> = {
   wigType: { type: PropType.Number, default: -1, min: -1, max: 254 },
   clothesType: { type: PropType.Number, default: -1, min: -1, max: 254 },
   shoesColor: { type: PropType.Number, default: -1, min: -1, max: 99 },
+  hatHeight: { type: PropType.Number, default: 64, min: 0, max: 127 },
   originPlatform: {
     type: PropType.Number,
     default: MiiCreatorOriginPlatform.Mii_Creator_v4,

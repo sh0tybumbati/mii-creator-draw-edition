@@ -3,6 +3,7 @@ import {
   MiiPagedFeatureSet,
   type FeatureSetIconItem
 } from "../components/MiiPagedFeatureSet";
+import EditorIcons from "../../constants/EditorIcons";
 import type { TabRenderInit } from "../../constants/TabRenderType";
 import { ArrayNum } from "../../util/Numbers";
 import { RenderPart } from "../../class/MiiEditor";
@@ -106,6 +107,26 @@ export function ExtHatTab(data: TabRenderInit) {
               MiiSwitchColorTable,
               makeSeparatorGapThinLaptop
             )
+          ]
+        },
+        hatHeight: {
+          label: __("Hat Height"),
+          header: __(
+            "%1 is a CUSTOM property, and will not transfer to any other data formats.",
+            __("Hat height")
+          ),
+          items: [
+            {
+              type: FeatureSetType.Slider,
+              property: "hatHeight",
+              iconStart: EditorIcons.scaleShort,
+              iconEnd: EditorIcons.scaleTall,
+              min: 0,
+              max: 127,
+              forceRender: true,
+              part: RenderPart.Head,
+              label: data.useAccessibility ? __("Hat Height") : undefined
+            }
           ]
         }
       }

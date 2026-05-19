@@ -85,6 +85,7 @@ export default class Mii {
   hatCommonColor!: number;
   hatFavoriteColor!: number;
   hatType!: number;
+  hatHeight!: number;
   height!: number;
   wigType!: number;
   moleScale!: number;
@@ -282,6 +283,7 @@ export default class Mii {
       hatCommonColor: this.hatCommonColor,
       hatFavoriteColor: this.hatFavoriteColor,
       hatType: this.hatType,
+      hatHeight: this.hatHeight,
       height: this.height,
       wigType: this.wigType,
       moleScale: this.moleScale,
@@ -386,6 +388,7 @@ export default class Mii {
     this.hatFavoriteColor = data.hatFavoriteColor;
     this.hatCommonColor = data.hatCommonColor;
     this.hatType = data.hatType;
+    this.hatHeight = data.hatHeight;
     this.height = data.height;
     this.wigType = data.wigType;
     this.moleScale = data.moleScale;
