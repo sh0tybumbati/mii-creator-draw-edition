@@ -1334,7 +1334,7 @@ export class Mii3DScene {
                 }
               });
 
-              hatModel.position.y += (this.mii.hatHeight - 64) * 0.005;
+              hatModel.position.y += (this.mii.hatHeight - 64) * 0.5;
 
               GLB.scene.add(hatModel);
             }
