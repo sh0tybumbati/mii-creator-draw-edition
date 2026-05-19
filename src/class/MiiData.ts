@@ -194,8 +194,12 @@ export default class Mii {
       case 124:
       case 125:
       case 126:
-        tempArray = allocateArray(126, input);
+      case 127:
+        tempArray = allocateArray(127, input);
         data = MiiCreatorV4Data.unpack(tempArray);
+        if (input.length < 127) {
+          data.hatHeight = 64;
+        }
         if (input.length < 126) {
           data.shoesColor = -1;
         }
