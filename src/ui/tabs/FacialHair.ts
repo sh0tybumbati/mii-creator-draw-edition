@@ -86,6 +86,12 @@ export function FacialHairTab(data: TabRenderInit) {
               property: "beardColor"
             })),
             makeSeparatorFSI(),
+            {
+              type: FeatureSetType.ColorPicker,
+              part: RenderPart.Head,
+              property: "beardColor",
+              colorTable: SwitchMiiColorTable as unknown as string[]
+            },
             ...rearrangeArray(
               ArrayNum(100).map((k) => ({
                 type: FeatureSetType.Icon,

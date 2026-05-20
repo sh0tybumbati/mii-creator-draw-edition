@@ -92,6 +92,17 @@ export function ExtHatTab(data: TabRenderInit) {
               }
             })) as FeatureSetIconItem[]),
             makeSeparatorFSI(),
+            {
+              type: FeatureSetType.ColorPicker,
+              part: RenderPart.Head,
+              property: "hatCommonColor",
+              colorTable: SwitchMiiColorTable as unknown as string[],
+              forceRender: true,
+              preSelectCallback: (mii, index) => {
+                mii.hatFavoriteColor = -1;
+                mii.hatCommonColor = index;
+              }
+            },
             ...rearrangeArray(
               ArrayNum(100).map((k) => ({
                 type: FeatureSetType.Icon,

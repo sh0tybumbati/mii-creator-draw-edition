@@ -50,6 +50,12 @@ export function GlassesTab(data: TabRenderInit) {
               property: "glassColor"
             })),
             makeSeparatorFSI(),
+            {
+              type: FeatureSetType.ColorPicker,
+              part: RenderPart.Head,
+              property: "glassColor",
+              colorTable: SwitchMiiColorTable as unknown as string[]
+            },
             ...rearrangeArray(
               ArrayNum(100).map((k) => ({
                 type: FeatureSetType.Icon,

@@ -12,7 +12,8 @@ export enum FeatureSetType {
   Range,
   Slider,
   Switch,
-  Misc
+  Misc,
+  ColorPicker
 }
 export interface FeatureSetIconItem {
   type: FeatureSetType.Icon;
@@ -77,6 +78,15 @@ export interface FeatureSetSwitchItem {
   bodyUpdateType?: BodyUpdateType;
   isNumber?: boolean;
 }
+export interface FeatureSetColorPickerItem {
+  type: FeatureSetType.ColorPicker;
+  part: RenderPart;
+  property: string;
+  colorTable: string[];
+  forceRender?: boolean;
+  bodyUpdateType?: BodyUpdateType;
+  preSelectCallback?: (tmpMii: Mii, colorIndex: number) => void;
+}
 export interface FeatureSetMiscItem {
   type: FeatureSetType.Misc;
   html: Html;
@@ -93,7 +103,8 @@ export type FeatureSetItem =
   | FeatureSetRangeItem
   | FeatureSetSliderItem
   | FeatureSetSwitchItem
-  | FeatureSetMiscItem;
+  | FeatureSetMiscItem
+  | FeatureSetColorPickerItem;
 export interface FeatureSetEntry {
   label: string;
   header?: Html | string;
@@ -114,6 +125,22 @@ export interface FeatureSet {
 }
 
 export const playHoverSound = () => playSound("hover");
+
+function findNearestColor(hex: string, table: string[]): number {
+  const parse = (h: string) => [
+    parseInt(h.slice(1, 3), 16),
+    parseInt(h.slice(3, 5), 16),
+    parseInt(h.slice(5, 7), 16)
+  ];
+  const [r1, g1, b1] = parse(hex);
+  let minDist = Infinity, nearest = 0;
+  for (let i = 0; i < table.length; i++) {
+    const [r2, g2, b2] = parse(table[i]);
+    const d = (r1 - r2) ** 2 + (g1 - g2) ** 2 + (b1 - b2) ** 2;
+    if (d < minDist) { minDist = d; nearest = i; }
+  }
+  return nearest;
+}
 
 export function MiiPagedFeatureSet(set: FeatureSet) {
   let tmpMii: Mii | any;
@@ -540,6 +567,48 @@ export function MiiPagedFeatureSet(set: FeatureSet) {
                   buttonRight.classOff("active");
                 }
                 break;
+              case FeatureSetType.ColorPicker: {
+                const cpItem = new Html("div")
+                  .class("feature-item")
+                  .style({
+                    background:
+                      "conic-gradient(red, yellow, lime, cyan, blue, magenta, red)",
+                    position: "relative",
+                    overflow: "hidden",
+                    cursor: "pointer"
+                  })
+                  .on("pointerenter", playHoverSound)
+                  .appendTo(setList);
+
+                new Html("input")
+                  .attr({ type: "color", value: "#ffffff" })
+                  .style({
+                    position: "absolute",
+                    inset: "0",
+                    width: "100%",
+                    height: "100%",
+                    opacity: "0",
+                    cursor: "pointer",
+                    padding: "0",
+                    border: "none"
+                  })
+                  .on("change", (e: Event) => {
+                    if (MiiEditor.getCurrentEditor() !== null) {
+                      tmpMii = MiiEditor.getCurrentEditor()!.mii;
+                    }
+                    const hex = (e.target as HTMLInputElement).value;
+                    const index = findNearestColor(hex, item.colorTable);
+                    if (item.preSelectCallback) {
+                      item.preSelectCallback(tmpMii, index);
+                    } else {
+                      (tmpMii as Record<string, any>)[item.property] = index;
+                    }
+                    playSound("select");
+                    update();
+                  })
+                  .appendTo(cpItem);
+                break;
+              }
               case FeatureSetType.Misc:
                 let featureMiscItem = item.html.appendTo(setList);
                 featureMiscItem.on("click", item.select);

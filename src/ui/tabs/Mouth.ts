@@ -56,6 +56,12 @@ export function MouthTab(data: TabRenderInit) {
               property: "mouthColor"
             })),
             makeSeparatorFSI(),
+            {
+              type: FeatureSetType.ColorPicker,
+              part: RenderPart.Face,
+              property: "mouthColor",
+              colorTable: SwitchMiiColorTable as unknown as string[]
+            },
             ...rearrangeArray(
               ArrayNum(100).map((k) => ({
                 type: FeatureSetType.Icon,

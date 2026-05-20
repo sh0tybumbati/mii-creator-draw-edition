@@ -77,6 +77,14 @@ export function ExtClothesTab(data: TabRenderInit) {
               sound: "select_color"
             },
             makeSeparatorGapThinFSI(),
+            {
+              type: FeatureSetType.ColorPicker,
+              part: RenderPart.Body,
+              property: "shirtColor",
+              colorTable: SwitchMiiColorTable as unknown as string[],
+              forceRender: true,
+              bodyUpdateType: BodyUpdateType.ClothingUpdate
+            },
             ...rearrangeArray(
               ArrayNum(100).map((k) => ({
                 type: FeatureSetType.Icon,
@@ -111,6 +119,14 @@ export function ExtClothesTab(data: TabRenderInit) {
               sound: "select_color"
             },
             makeSeparatorGapThinFSI(),
+            {
+              type: FeatureSetType.ColorPicker,
+              part: RenderPart.Body,
+              property: "pantsColor",
+              colorTable: SwitchMiiColorTable as unknown as string[],
+              forceRender: false,
+              bodyUpdateType: BodyUpdateType.ClothingUpdate
+            },
             ...rearrangeArray(
               ArrayNum(100).map((k) => ({
                 type: FeatureSetType.Icon,
@@ -145,6 +161,14 @@ export function ExtClothesTab(data: TabRenderInit) {
               sound: "select_color"
             },
             makeSeparatorGapThinFSI(),
+            {
+              type: FeatureSetType.ColorPicker,
+              part: RenderPart.Body,
+              property: "shoesColor",
+              colorTable: SwitchMiiColorTable as unknown as string[],
+              forceRender: false,
+              bodyUpdateType: BodyUpdateType.ClothingUpdate
+            },
             ...rearrangeArray(
               ArrayNum(100).map((k) => ({
                 type: FeatureSetType.Icon,

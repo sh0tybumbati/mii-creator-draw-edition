@@ -63,6 +63,12 @@ export function EyebrowTab(data: TabRenderInit) {
               part: RenderPart.Face
             })),
             makeSeparatorFSI(),
+            {
+              type: FeatureSetType.ColorPicker,
+              part: RenderPart.Face,
+              property: "eyebrowColor",
+              colorTable: SwitchMiiColorTable as unknown as string[]
+            },
             ...rearrangeArray(
               ArrayNum(100).map((k) => ({
                 type: FeatureSetType.Icon,

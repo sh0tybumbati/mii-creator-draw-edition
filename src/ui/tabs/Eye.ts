@@ -65,6 +65,12 @@ export function EyeTab(data: TabRenderInit) {
                 }) as FeatureSetIconItem
             ),
             makeSeparatorFSI(),
+            {
+              type: FeatureSetType.ColorPicker,
+              part: RenderPart.Face,
+              property: "eyeColor",
+              colorTable: SwitchMiiColorTable as unknown as string[]
+            },
             ...rearrangeArray(
               ArrayNum(100).map((k) => ({
                 type: FeatureSetType.Icon,

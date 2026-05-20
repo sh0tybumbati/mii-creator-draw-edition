@@ -54,6 +54,12 @@ export function HairTab(data: TabRenderInit) {
               part: RenderPart.Head
             })),
             makeSeparatorFSI(),
+            {
+              type: FeatureSetType.ColorPicker,
+              part: RenderPart.Head,
+              property: "hairColor",
+              colorTable: SwitchMiiColorTable as unknown as string[]
+            },
             ...rearrangeArray(
               ArrayNum(100).map((k) => ({
                 type: FeatureSetType.Icon,
